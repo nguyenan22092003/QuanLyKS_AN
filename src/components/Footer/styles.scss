@@ -1,0 +1,18 @@
+.footer-app {
+  .content-footer {
+    padding-top: 20px;
+    padding-bottom: 50px;
+    background-color: rgba(0, 0, 0, 0.8);
+    // background-image: url(${footer_bgr});
+    color: #fff;
+  }
+
+  .end-page {
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

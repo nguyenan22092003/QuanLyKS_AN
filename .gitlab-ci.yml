@@ -1,0 +1,17 @@
+deploy-fe:
+  script:
+    - echo "Start build dev"
+    - rm -rf node_modules
+    - rm -f yarn.lock
+    - npm cache clear --force
+    - export NODE_OPTIONS=--openssl-legacy-provider
+    - npm install --force
+    - CI='' npm run build
+    - echo "End build dev"
+    - find /home/khanhnq7/Vocabulary/02.FE/* -type f -not -name 'config.js' -delete
+    - rsync -r --exclude 'config.js' ./build/* /home/khanhnq7/Vocabulary/02.FE
+  only:
+    - main
+  tags:
+    - linux
+  when: always

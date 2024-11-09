@@ -1,0 +1,68 @@
+@import "./assets/scss/index.scss";
+.w-100 {
+  width: 100%;
+}
+.w-100vw {
+  width: 100vw;
+}
+.h-100 {
+  height: 100%;
+}
+.h-100vh {
+  height: 100vh;
+}
+.pointer {
+  cursor: pointer;
+}
+.nowrap {
+  flex-wrap: nowrap;
+}
+.text-center {
+  text-align: center;
+}
+.text-end {
+  text-align: end;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.section {
+  max-width: 1300px;
+}
+
+.ant-table-thead > tr > th {
+  // background-color: #1677ff !important;
+  // color: #fff !important;
+}
+.sub-color {
+  color: #838383;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.title-page-admin {
+  font-size: 22px;
+  font-weight: 600;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(9, 9, 121, 1) 4%,
+      rgba(0, 212, 255, 1) 33%,
+      rgba(0, 212, 255, 1) 89%
+    );
+  }
+}
