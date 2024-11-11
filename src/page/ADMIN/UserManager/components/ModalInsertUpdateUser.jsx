@@ -1,9 +1,11 @@
-import { Col, Form, Input, InputNumber, Row, Select, Space, Spin } from "antd";
+import { Col, DatePicker, Form, Input, Row, Select, Space, Spin } from "antd";
+import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import CustomModal from "src/components/CustomModal";
 import Button from "src/components/MyButton/Button";
 import Notice from "src/components/Notice";
-import RoomService from "src/services/RoomService";
+import { getRegexEmail, getRegexPhoneNumber } from "src/lib/stringsUtils";
+import UserService from "src/services/UserService";
 
 const ModalInsertUpdateUser = ({ onOk, open, onCancel }) => {
   const isUpdate = open.isUpdate;
@@ -13,11 +15,10 @@ const ModalInsertUpdateUser = ({ onOk, open, onCancel }) => {
     if (isUpdate) {
       form.setFieldsValue({
         ...open,
+        birthDate: !!open.birthDate ? dayjs(open.birthDate) : null,
       });
     } else {
-      form.setFieldsValue({
-        status: "AVAILABLE",
-      });
+      form.setFieldsValue({});
     }
   }, [open]);
 
@@ -27,12 +28,19 @@ const ModalInsertUpdateUser = ({ onOk, open, onCancel }) => {
       const values = await form.validateFields();
       let res;
       if (isUpdate) {
-        res = await RoomService.updateRoom(open.id, {
+        res = await UserService.updateUser(open.id, {
           ...values,
+          birthDate: values.birthDate
+            ? values.birthDate.format("YYYY-MM-DD")
+            : null,
         });
       } else {
-        res = await RoomService.addRoom({
+        res = await UserService.addUser({
           ...values,
+          birthDate: values.birthDate
+            ? values.birthDate.format("YYYY-MM-DD")
+            : null,
+          username: `${values.firstName} ${values.lastName}`,
         });
       }
       console.log("res: ", res);
@@ -40,7 +48,7 @@ const ModalInsertUpdateUser = ({ onOk, open, onCancel }) => {
         return Notice({ msg: res?.message, isSuccess: false });
       onOk && onOk();
       Notice({
-        msg: `${isUpdate ? "Update" : "Add"} Room successful!`,
+        msg: `${isUpdate ? "Update" : "Add"} User successful!`,
       });
       onCancel();
     } finally {
@@ -60,20 +68,35 @@ const ModalInsertUpdateUser = ({ onOk, open, onCancel }) => {
   );
   return (
     <CustomModal
-      title={!!isUpdate ? "Update Room" : "Add Room"}
+      title={!!isUpdate ? "Update User" : "Add User"}
       footer={renderFooter()}
-      width={600}
+      width={1000}
       open={open}
       onCancel={onCancel}
     >
       <Spin spinning={loading}>
         <Form form={form} layout="vertical">
           <Row gutter={[16]}>
-            <Col md={24} xs={24}>
+            {/* <Col md={8} xs={24}>
               <Form.Item
-                label="Room Name"
+                label="User Name"
                 required
-                name="name"
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter name...",
+                  },
+                ]}
+              >
+                <Input placeholder="Enter name..." />
+              </Form.Item>
+            </Col> */}
+            <Col md={8} xs={24}>
+              <Form.Item
+                label="First Name"
+                required
+                name="firstName"
                 rules={[
                   {
                     required: true,
@@ -84,54 +107,11 @@ const ModalInsertUpdateUser = ({ onOk, open, onCancel }) => {
                 <Input placeholder="Enter name..." />
               </Form.Item>
             </Col>
-            <Col md={24} xs={24}>
+            <Col md={8} xs={24}>
               <Form.Item
-                label="Number people"
+                label="Last Name"
                 required
-                name="numberPeople"
-                rules={[
-                  {
-                    required: true,
-                    message: "Enter number people...",
-                  },
-                ]}
-              >
-                <InputNumber
-                  className="w-100"
-                  min={1}
-                  max={100}
-                  placeholder="Enter number people..."
-                />
-              </Form.Item>
-            </Col>
-            <Col md={24} xs={24}>
-              <Form.Item
-                label="Price"
-                required
-                name="price"
-                rules={[
-                  {
-                    required: true,
-                    message: "Enter price...",
-                  },
-                ]}
-              >
-                <InputNumber
-                  className="w-100"
-                  placeholder="Enter price..."
-                  min={0}
-                  formatter={(value) =>
-                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  }
-                  parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                />
-              </Form.Item>
-            </Col>
-            <Col md={24} xs={24}>
-              <Form.Item
-                label="Room status"
-                required
-                name="status"
+                name="lastName"
                 rules={[
                   {
                     required: true,
@@ -139,28 +119,91 @@ const ModalInsertUpdateUser = ({ onOk, open, onCancel }) => {
                   },
                 ]}
               >
-                <Select>
-                  <Select.Option value="AVAILABLE">AVAILABLE</Select.Option>
-                  <Select.Option value="UNAVAILABLE">UNAVAILABLE</Select.Option>
-                </Select>
+                <Input placeholder="Enter name..." />
+              </Form.Item>
+            </Col>
+            <Col md={8} xs={24}>
+              <Form.Item
+                label="Citizen Identification Card"
+                required
+                name="citizenIdentificationCard"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter number...",
+                  },
+                ]}
+              >
+                <Input placeholder="Enter number..." />
+              </Form.Item>
+            </Col>
+            <Col md={8} xs={24}>
+              <Form.Item
+                label="Phone Number"
+                required
+                name="phoneNumber"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter phone number...",
+                  },
+                  {
+                    pattern: getRegexPhoneNumber(),
+                    message: "Please enter correct phone number format!",
+                  },
+                ]}
+              >
+                <Input placeholder="Enter phone number..." />
+              </Form.Item>
+            </Col>
+            <Col md={8} xs={24}>
+              <Form.Item
+                label="Email"
+                required
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter email...",
+                  },
+                  {
+                    pattern: getRegexEmail(),
+                    message: "Please enter correct email format!",
+                  },
+                ]}
+              >
+                <Input placeholder="Enter email..." />
+              </Form.Item>
+            </Col>
+            <Col md={8} xs={24}>
+              <Form.Item label="Birth date" name="birthDate">
+                <DatePicker
+                  className="w-100"
+                  placeholder="Select date"
+                  format="YYYY-MM-DD"
+                  allowClear
+                  disabledDate={(current) =>
+                    current && current >= dayjs().startOf("day")
+                  }
+                />
               </Form.Item>
             </Col>
             <Col md={24} xs={24}>
               <Form.Item
-                label="Room Description"
+                label="User address"
                 required
-                name="description"
+                name="address"
                 rules={[
                   {
                     required: true,
-                    message: "Enter description...",
+                    message: "Enter address...",
                   },
                 ]}
               >
                 <Input.TextArea
                   size="large"
                   rows={4}
-                  placeholder="Enter description..."
+                  placeholder="Enter address..."
                 />
               </Form.Item>
             </Col>

@@ -1,9 +1,13 @@
 import axios from "axios";
 import notice from "src/components/Notice";
-import STORAGE, { deleteStorage, getStorage } from "src/lib/storage";
+import STORAGE, {
+  clearStorage,
+  deleteStorage,
+  getStorage,
+} from "src/lib/storage";
 import { getMsgClient } from "src/lib/stringsUtils";
 import { trimData } from "src/lib/utils";
-import ROUTER from "src/router";
+import { ROUTER } from "src/router/Router";
 /**
  *
  * parse error response
@@ -37,7 +41,7 @@ export function parseBody(response) {
   //     isSuccess: false,
   //   });
   // }
-
+  console.log("response: ", response);
   if (response?.status === 200 || response?.status === 201) {
     if (resData.StatusCode === 401) {
       deleteStorage(STORAGE.TOKEN);
@@ -88,43 +92,55 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => parseBody(response),
   (error) => {
+    console.log("error: ", error);
+    // outdated token
+    if (error?.status === 401) {
+      deleteStorage(STORAGE.TOKEN);
+      clearStorage();
+      window.location.replace(ROUTER.LOGIN);
+    } else {
+      notice({
+        msg: error.response?.data?.message,
+        isSuccess: false,
+      });
+    }
     // can not connect API
-    if (error.code === "ECONNABORTED") {
-      notice({
-        msg: "Hệ thống đang tạm thời gián đoạn. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ ",
-        isSuccess: false,
-      });
-    } else if (+error?.response?.status >= 500) {
-      notice({
-        msg: `Hệ thống đang tạm thời gián đoạn. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ `,
-        isSuccess: false,
-      });
-    } else if (
-      +error?.response?.status < 500 &&
-      +error?.response?.status !== 200
-    ) {
-      notice({
-        msg: `Hệ thống xảy ra lỗi. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ (SC${error?.response?.status})`,
-        isSuccess: false,
-      });
-    } else if (error.code === "ERR_NETWORK") {
-      notice({
-        msg: `Hệ thống đang bị gián đoạn, vui lòng kiểm tra lại đường truyền!`,
-        isSuccess: false,
-      });
-    } else if (typeof error.response === "undefined") {
-      notice({ msg: error.response, isSuccess: false });
-    } else if (error.response) {
-      notice({
-        msg: `Hệ thống đang tạm thời gián đoạn. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ `,
-        isSuccess: false,
-      });
-      return parseError(error.response.data);
-    } else
-      notice({
-        msg: `Hệ thống đang tạm thời gián đoạn. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ `,
-        isSuccess: false,
-      });
+    // if (error.code === "ECONNABORTED") {
+    //   notice({
+    //     msg: "Hệ thống đang tạm thời gián đoạn. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ ",
+    //     isSuccess: false,
+    //   });
+    // } else if (+error?.response?.status >= 500) {
+    //   notice({
+    //     msg: `Hệ thống đang tạm thời gián đoạn. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ `,
+    //     isSuccess: false,
+    //   });
+    // } else if (
+    //   +error?.response?.status < 500 &&
+    //   +error?.response?.status !== 200
+    // ) {
+    //   notice({
+    //     msg: `Hệ thống xảy ra lỗi. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ (SC${error?.response?.status})`,
+    //     isSuccess: false,
+    //   });
+    // } else if (error.code === "ERR_NETWORK") {
+    //   notice({
+    //     msg: `Hệ thống đang bị gián đoạn, vui lòng kiểm tra lại đường truyền!`,
+    //     isSuccess: false,
+    //   });
+    // } else if (typeof error.response === "undefined") {
+    //   notice({ msg: error.response, isSuccess: false });
+    // } else if (error.response) {
+    //   notice({
+    //     msg: `Hệ thống đang tạm thời gián đoạn. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ `,
+    //     isSuccess: false,
+    //   });
+    //   return parseError(error.response.data);
+    // } else
+    //   notice({
+    //     msg: `Hệ thống đang tạm thời gián đoạn. Xin vui lòng trở lại sau hoặc thông báo với ban quản trị để được hỗ trợ `,
+    //     isSuccess: false,
+    //   });
     return Promise.reject(error);
   }
 );

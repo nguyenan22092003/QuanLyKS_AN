@@ -43,15 +43,15 @@ const UserManager = () => {
     //   dataIndex: "lastName",
     //   key: "lastName",
     // },
+    // {
+    //   title: "User Name",
+    //   dataIndex: "username",
+    //   key: "username",
+    // },
     {
       title: "Citizen Identification Card",
       dataIndex: "citizenIdentificationCard",
       key: "citizenIdentificationCard",
-    },
-    {
-      title: "User Name",
-      dataIndex: "username",
-      key: "username",
     },
     {
       title: "Email",
@@ -69,11 +69,11 @@ const UserManager = () => {
       key: "birthDate",
       render: (val) => (val ? moment(val).format("YYYY-MM-DD") : ""),
     },
-    {
-      title: "City",
-      dataIndex: "city",
-      key: "city",
-    },
+    // {
+    //   title: "City",
+    //   dataIndex: "city",
+    //   key: "city",
+    // },
     {
       title: "Address",
       dataIndex: "address",
@@ -143,7 +143,7 @@ const UserManager = () => {
     Modal.confirm({
       title: "Are you sure to Delete this user?",
       icon: <DeleteOutlined />,
-      content: `User Name: ${record.name}`,
+      content: `Full Name: ${record.first} ${record.lastName}`,
       okText: "Yes",
       okType: "danger",
       cancelText: "No",

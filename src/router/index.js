@@ -9,6 +9,7 @@ import LoginPage from "src/page/ANONYMOUS/LoginPage";
 import Dashboard from "src/page/ADMIN/Dashboard";
 import RoomManager from "src/page/ADMIN/RoomManager";
 import UserManager from "src/page/ADMIN/UserManager";
+import BookingManager from "src/page/ADMIN/BookingManager";
 
 const AppRouter = () => {
   return (
@@ -31,29 +32,10 @@ const AppRouter = () => {
         }
       />
       <Route
-        path={ROUTER.BOOKING}
-        element={
-          <PrivateRoute>
-            <div />
-            BOOKING
-          </PrivateRoute>
-        }
-      />
-      <Route
         path={ROUTER.BOOKING_MANAGER}
         element={
           <PrivateRoute>
-            <div />
-            BOOKING_MANAGER
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path={ROUTER.ROOM_TYPE_MANAGER}
-        element={
-          <PrivateRoute>
-            <div />
-            ROOM_TYPE_MANAGER
+            <BookingManager />
           </PrivateRoute>
         }
       />

@@ -22,22 +22,19 @@ const items = [
     icon: <FaRegBuilding />,
     children: [
       {
-        label: "Đặt phòng",
-        key: ROUTER.BOOKING,
-      },
-      {
         label: "Quản lý đặt phòng",
         key: ROUTER.BOOKING_MANAGER,
-      },
-      {
-        label: "Quản lý loại phòng",
-        key: ROUTER.ROOM_TYPE_MANAGER,
       },
       {
         label: "Quản lý phòng",
         key: ROUTER.ROOM_MANAGER,
       },
     ],
+  },
+  {
+    label: "Khách hàng",
+    key: ROUTER.CUSTOMERS_MANAGER,
+    icon: <FaUser />,
   },
   {
     label: "Dịch vụ",
@@ -48,11 +45,6 @@ const items = [
     label: "Thiết bị",
     key: ROUTER.DEVICES_MANAGER,
     icon: <MdDevicesOther />,
-  },
-  {
-    label: "Khách hàng",
-    key: ROUTER.CUSTOMERS_MANAGER,
-    icon: <FaUser />,
   },
 ];
 
