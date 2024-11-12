@@ -13,7 +13,9 @@ import "./styles.scss";
 
 const Header = ({ isAdmin }) => {
   const { userInfo } = useSelector((state) => state.appGlobal);
+  console.log("userInfo: ", userInfo);
   const dispatch = useDispatch();
+  console.log();
   const navigate = useNavigate();
   const handleLogout = (e) => {
     navigate(ROUTER.LOGIN);
@@ -49,7 +51,7 @@ const Header = ({ isAdmin }) => {
           <div className="fs-20 fw-600" style={{ color: "#fff" }}>
             Quản lý khách sạn
           </div>
-          {userInfo?.username ? (
+          {userInfo?.firstName || userInfo?.lastName ? (
             <Dropdown
               overlay={menuAccount}
               overlayStyle={{ minWidth: "200px" }}
@@ -60,7 +62,7 @@ const Header = ({ isAdmin }) => {
                   className="ml-8 d-flex align-items-center"
                   style={{ color: "#fff" }}
                 >
-                  <div className="fs-15 mr-4">{userInfo.username}</div>
+                  <div className="fs-15 mr-4">{`${userInfo.firstName} ${userInfo.lastName}`}</div>
                   <IoMdArrowDropdown className="fs-20" />
                 </div>
               </div>
