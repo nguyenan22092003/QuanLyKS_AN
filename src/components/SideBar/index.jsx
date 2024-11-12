@@ -36,16 +36,16 @@ const items = [
     key: ROUTER.CUSTOMERS_MANAGER,
     icon: <FaUser />,
   },
-  {
-    label: "Dịch vụ",
-    key: ROUTER.SERVICES_MANAGER,
-    icon: <MdOutlineCleaningServices />,
-  },
-  {
-    label: "Thiết bị",
-    key: ROUTER.DEVICES_MANAGER,
-    icon: <MdDevicesOther />,
-  },
+  // {
+  //   label: "Dịch vụ",
+  //   key: ROUTER.SERVICES_MANAGER,
+  //   icon: <MdOutlineCleaningServices />,
+  // },
+  // {
+  //   label: "Thiết bị",
+  //   key: ROUTER.DEVICES_MANAGER,
+  //   icon: <MdDevicesOther />,
+  // },
 ];
 
 function SideBar({ children }) {

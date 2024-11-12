@@ -197,7 +197,7 @@ const ModalInsertUpdateBooking = ({ onOk, open, onCancel }) => {
                   {listRoom?.map((i, idx) => (
                     <Select.Option value={i.id}>{`${i.name} (${
                       i.numberPeople
-                    } - ${formatMoneyVND(i.price)})`}</Select.Option>
+                    } - ${formatMoneyVND(+i.price)})`}</Select.Option>
                   ))}
                 </Select>
               </Form.Item>
