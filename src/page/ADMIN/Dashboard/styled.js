@@ -33,12 +33,39 @@ export const DashboardStyled = styled.div`
       font-size: 20px;
     }
     .dash-board_item_value {
+      position: relative;
       font-weight: 600;
       font-size: 50px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       flex: 1;
+      height: fit-content;
+      padding-right: 20px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        right: -12px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 60px;
+        width: 10px;
+        background-color: #ffd666;
+      }
+    }
+
+    &.item-special {
+      background-color: #ffd666;
+    }
+    .percent-room {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #ffe7a6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;

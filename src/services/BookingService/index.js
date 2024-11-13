@@ -8,6 +8,7 @@ const confirmBooking = (id, body) => http.patch(`bookings/${id}/confirm`, body);
 const completeBooking = (id, body) =>
   http.patch(`bookings/${id}/complete`, body);
 const paymentBooking = (id, body) => http.patch(`bookings/${id}/payment`, body);
+const statistical = (id, body) => http.get(`bookings/statistical`);
 
 const BookingService = {
   getBooking,
@@ -17,5 +18,6 @@ const BookingService = {
   confirmBooking,
   completeBooking,
   paymentBooking,
+  statistical,
 };
 export default BookingService;

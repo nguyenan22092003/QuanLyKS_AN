@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import CustomModal from "src/components/CustomModal";
 import Button from "src/components/MyButton/Button";
 import Notice from "src/components/Notice";
-import { getRegexEmail, getRegexPhoneNumber } from "src/lib/stringsUtils";
 import { formatMoneyVND } from "src/lib/utils";
 import BookingService from "src/services/BookingService";
 import RoomService from "src/services/RoomService";
@@ -41,9 +40,9 @@ const ModalInsertUpdateBooking = ({ onOk, open, onCancel }) => {
   const getListRoom = async () => {
     try {
       setLoading(true);
-      const res = await RoomService.getRoom();
+      const res = await RoomService.getRoomByDate();
       if (res.status !== "success") return;
-      setListRoom(res.data?.responses?.filter((i) => i.status === "AVAILABLE"));
+      setListRoom(res.data);
     } finally {
       setLoading(false);
     }
