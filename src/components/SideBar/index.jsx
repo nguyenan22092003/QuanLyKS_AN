@@ -17,22 +17,22 @@ const items = [
     icon: <MdDashboard />,
   },
   {
-    label: "Phòng",
+    label: "Rooms",
     key: "subMenu",
     icon: <FaRegBuilding />,
     children: [
       {
-        label: "Quản lý đặt phòng",
+        label: "Booking Manager",
         key: ROUTER.BOOKING_MANAGER,
       },
       {
-        label: "Quản lý phòng",
+        label: "Rooms Manager",
         key: ROUTER.ROOM_MANAGER,
       },
     ],
   },
   {
-    label: "Khách hàng",
+    label: "User Manager",
     key: ROUTER.CUSTOMERS_MANAGER,
     icon: <FaUser />,
   },

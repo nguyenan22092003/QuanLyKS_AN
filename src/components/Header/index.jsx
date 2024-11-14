@@ -13,7 +13,6 @@ import "./styles.scss";
 
 const Header = ({ isAdmin }) => {
   const { userInfo } = useSelector((state) => state.appGlobal);
-  console.log("userInfo: ", userInfo);
   const dispatch = useDispatch();
   console.log();
   const navigate = useNavigate();
@@ -49,7 +48,7 @@ const Header = ({ isAdmin }) => {
       <div className={`header-app justify-content-space-between header-admin`}>
         <LayoutUser className="d-flex align-items-center justify-content-space-between pl-24 pr-24">
           <div className="fs-20 fw-600" style={{ color: "#fff" }}>
-            Quản lý khách sạn
+            Hotel Manager
           </div>
           {userInfo?.firstName || userInfo?.lastName ? (
             <Dropdown
