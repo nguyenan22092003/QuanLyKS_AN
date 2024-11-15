@@ -193,6 +193,16 @@ const ModalViewDetail = ({
             </div>
           </div>
         </Col>
+        <Col span={12}>
+          <div className="d-flex align-items-center">
+            <div className="fs-14 fw-500 mr-6" style={{ whiteSpace: "nowrap" }}>
+              Description:{" "}
+            </div>
+            <div className="fs-16 fw-600">
+                {open?.description}
+            </div>
+          </div>
+        </Col>
       </Row>
       <div className="fs-18 fw-600 mt-20 mb-12">List Rooms</div>
       <Table
