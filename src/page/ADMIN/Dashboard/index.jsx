@@ -32,11 +32,11 @@ const Dashboard = () => {
                 <CiLogin className="dash-board_item_icon" />
               </div>
               <div className="dash-board_item_title">
-                Số lượt <br /> đặt phòng
+                Number of <br /> bookings
               </div>
             </div>
             <div style={{ color: "#888" }} className="fw-600 mt-8">
-              Trong tuần
+              During the week
             </div>
             <div className="dash-board_item_value">{data?.countBooking}</div>
           </div>
@@ -46,11 +46,11 @@ const Dashboard = () => {
                 <FaBuildingUser className="dash-board_item_icon" />
               </div>
               <div className="dash-board_item_title">
-                Số phòng <br /> đã thuê
+                Number of <br /> rooms rented
               </div>
             </div>
             <div style={{ color: "#888" }} className="fw-600 mt-8">
-              Trong tuần
+              During the week
             </div>
             <div className="dash-board_item_value">
               {data?.countBooingConfirmed}
@@ -66,7 +66,9 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="text-center fs-50 fw-600">{data?.emptyRoom}</div>
-            <div className="text-center fs-18 fw-600 mt-12">Phòng trống</div>
+            <div className="text-center fs-18 fw-600 mt-12">
+              Room Availability
+            </div>
           </div>
         </Space>
       </Spin>

@@ -1,13 +1,13 @@
-import SvgIcon from "src/components/SvgIcon"
+import SvgIcon from "src/components/SvgIcon";
 
-import { ModalStyled, ModalWrapper } from "./styled"
+import { ModalStyled, ModalWrapper } from "./styled";
 export default function CB1({
   width = 600,
   title,
   icon = "warning-usb",
   okText = "Đồng ý",
-  cancelText = "Đóng",
-  onOk = e => e(),
+  cancelText = "Close",
+  onOk = (e) => e(),
   ...props
 }) {
   ModalStyled.confirm({
@@ -52,5 +52,5 @@ export default function CB1({
         )}
       </ModalWrapper>
     ),
-  })
+  });
 }

@@ -49,7 +49,7 @@ const ModalViewDetail = ({
   const renderFooter = () => (
     <Space size={12}>
       <Button btnType="gray" onClick={onCancel}>
-        Đóng
+        Close
       </Button>
       {open.status_booking !== "WAITING" &&
         open.status_payment === "UNPAID" && (

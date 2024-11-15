@@ -34,7 +34,7 @@ const Header = ({ isAdmin }) => {
             >
               <div className="btn-logout">
                 <SvgIcon name="logoutIcon" />
-                Đăng xuất
+                Logout
               </div>
             </Menu.Item>
           </div>

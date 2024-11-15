@@ -51,7 +51,7 @@ const ModalInsertUpdateRoom = ({ onOk, open, onCancel }) => {
   const renderFooter = () => (
     <Space size={12}>
       <Button btnType="gray" onClick={onCancel}>
-        Đóng
+        Close
       </Button>
       <Button type="primary" onClick={handleSave}>
         Save

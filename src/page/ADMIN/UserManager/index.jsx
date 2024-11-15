@@ -142,7 +142,7 @@ const UserManager = () => {
     Modal.confirm({
       title: "Are you sure to Delete this user?",
       icon: <DeleteOutlined />,
-      content: `Full Name: ${record.first} ${record.lastName}`,
+      content: `Full Name: ${record.firstName} ${record.lastName}`,
       okText: "Yes",
       okType: "danger",
       cancelText: "No",
