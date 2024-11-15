@@ -77,7 +77,7 @@ const LoginModal = ({
               rules={[
                 {
                   required: true,
-                  message: "Thông tin không được để trống!",
+                  message: "input username!",
                 },
               ]}
               name="username"
@@ -89,7 +89,7 @@ const LoginModal = ({
               rules={[
                 {
                   required: true,
-                  message: "Bạn chưa nhập mật khẩu!",
+                  message: "input password!",
                 },
               ]}
               name="password"

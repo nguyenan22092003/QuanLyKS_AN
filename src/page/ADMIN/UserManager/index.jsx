@@ -4,13 +4,12 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import { Button, Modal, Space, Spin, Table, Tooltip } from "antd";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import Notice from "src/components/Notice";
 import UserService from "src/services/UserService";
-import { UserPageStyle } from "./styled";
-import { formatMoneyVND } from "src/lib/utils";
 import ModalInsertUpdateUser from "./components/ModalInsertUpdateUser";
-import moment from "moment";
+import { UserPageStyle } from "./styled";
 
 const UserManager = () => {
   const [loading, setLoading] = useState(false);

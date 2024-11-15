@@ -41,7 +41,6 @@ export function parseBody(response) {
   //     isSuccess: false,
   //   });
   // }
-  console.log("response: ", response);
   if (response?.status === 200 || response?.status === 201) {
     if (resData.StatusCode === 401) {
       deleteStorage(STORAGE.TOKEN);

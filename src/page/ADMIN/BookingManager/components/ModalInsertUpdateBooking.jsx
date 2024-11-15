@@ -20,7 +20,6 @@ import RoomService from "src/services/RoomService";
 import UserService from "src/services/UserService";
 
 const ModalInsertUpdateBooking = ({ onOk, open, onCancel }) => {
-  console.log("open: ", open);
   const isUpdate = open.isUpdate;
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);

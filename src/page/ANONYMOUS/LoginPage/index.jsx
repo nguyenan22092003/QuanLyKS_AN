@@ -44,9 +44,7 @@ const LoginPage = () => {
     <LoginPageStyled>
       <StyleLogin>
         <div className="text-center mb-40">
-          <div className="fs-22 fw-600 title-popup">
-            Đăng nhập hệ thống QLKS
-          </div>
+          <div className="fs-22 fw-600 title-popup">LOGIN PAGE</div>
         </div>
         <div>
           <Form form={form} layout="vertical">
@@ -54,7 +52,7 @@ const LoginPage = () => {
               rules={[
                 {
                   required: true,
-                  message: "Thông tin không được để trống!",
+                  message: "Please input username!",
                 },
               ]}
               name="username"
@@ -66,7 +64,7 @@ const LoginPage = () => {
               rules={[
                 {
                   required: true,
-                  message: "Bạn chưa nhập mật khẩu!",
+                  message: "Please input password!",
                 },
               ]}
               name="password"
@@ -98,7 +96,7 @@ const LoginPage = () => {
               htmlType="submit"
               onClick={onLogin}
             >
-              Đăng nhập
+              Login
             </Button>
           </Form>
           {/* <Divider plain className="mv-12">
