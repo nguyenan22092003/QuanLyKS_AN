@@ -38,6 +38,9 @@ body::-webkit-scrollbar-track {
   box-shadow: unset;
   margin: 5px 0;
 }
+body > iframe {
+  display: none;
+}
 
 body::-webkit-scrollbar-thumb {
   background: #c5ced9;
